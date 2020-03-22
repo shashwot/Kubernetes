@@ -3,7 +3,7 @@
 #INSTALLATION REQUIREMENTS
 # Centos7
 # 2 core CPU (Compulsory)
-
+#run from root user
 
 systemctl stop firewalld
 systemctl disable firewalld
@@ -52,15 +52,14 @@ systemctl start kubelet
 sudo hostnamectl set-hostname master-node
 
 #Enter you desired ip for master
-#echo '192.168.1.10 master.kubernetes.com master-node' >> /etc/hosts
+echo '192.168.1.10 master.kubernetes.com master-node' >> /etc/hosts
 #echo '192.168.1.20 node1.kubernetes.com node1 worker-node' >> /etc/hosts
+kubeadm init --pod-network-cidr=10.10.0.0/16
+
+kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml
 
 mkdir -p /root/.kube
 sudo cp -i /etc/kubernetes/admin.conf /root/.kube/config
 sudo chown root:root /root/.kube/config
-
-kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml
-
-kubeadm init -–pod-network-cidr=10.10.0.0/16
 
 kubectl get all -A
