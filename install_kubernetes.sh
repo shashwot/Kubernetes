@@ -63,3 +63,6 @@ sudo cp -i /etc/kubernetes/admin.conf /root/.kube/config
 sudo chown root:root /root/.kube/config
 
 kubectl get all -A
+
+
+echo '.............Kubernetes Setup and Ready to Use...............'
