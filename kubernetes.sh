@@ -52,8 +52,8 @@ systemctl start kubelet
 sudo hostnamectl set-hostname master-node
 
 #Enter you desired ip for master
-#echo '192.168.57.135 master master-node' >> /etc/hosts
-#echo '192.168.1.20 node1.kubernetes.com node1 worker-node' >> /etc/hosts
+echo '192.168.1.10 master master-node' >> /etc/hosts
+#echo '192.168.1.20 node1 worker-node' >> /etc/hosts
 kubeadm init --pod-network-cidr=10.10.0.0/16
 
 wget https://docs.projectcalico.org/v3.11/manifests/calico.yaml
