@@ -56,7 +56,7 @@ clear
 read -p " Enter your IP: " action
 
 #Enter you desired ip for master
-echo '$action master master-node' >> /etc/hosts
+cat /etc/hosts >> '$action master master-node'
 #echo '192.168.1.20 node1 worker-node' >> /etc/hosts
 kubeadm init --pod-network-cidr=10.10.0.0/16
 
