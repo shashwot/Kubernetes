@@ -10,9 +10,9 @@ systemctl disable firewalld
 
 setenforce 0
 
-sed -i 's/SELINUX=enforcing/SELINUX=disbaled/g' 
+sed -i 's,SELINUX=enforcing,SELINUX=disbaled,g' 
 
-sed -i 's/\/dev\/mapper\/centos-swap/#\/dev\/mapper\/centos-swap/g' /etc/fstab
+sed -i 's,/dev/mapper/centos-swap,#/dev/mapper/centos-swap,g' /etc/fstab
 sudo swapoff -a
 
 cat <<EOF > /etc/yum.repos.d/kubernetes.repo
@@ -51,19 +51,23 @@ systemctl start kubelet
 
 sudo hostnamectl set-hostname master-node
 
+clear
+
+read -p " Enter your IP: " action
+
 #Enter you desired ip for master
-echo '192.168.1.10 master master-node' >> /etc/hosts
+echo '$action master master-node' >> /etc/hosts
 #echo '192.168.1.20 node1 worker-node' >> /etc/hosts
 kubeadm init --pod-network-cidr=10.10.0.0/16
+
+mkdir -p /root/.kube
+sudo cp -i /etc/kubernetes/admin.conf /root/.kube/config
+sudo chown root:root /root/.kube/config
 
 wget https://docs.projectcalico.org/v3.11/manifests/calico.yaml
 sed -i 's/192.168.0.0\/16/10.10.0.0\/16/g' calico.yaml
 kubectl apply -f calico.yaml
 rm -rf calico.yaml
-
-mkdir -p /root/.kube
-sudo cp -i /etc/kubernetes/admin.conf /root/.kube/config
-sudo chown root:root /root/.kube/config
 
 echo ' '
 echo ' '
