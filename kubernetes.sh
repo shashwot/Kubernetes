@@ -64,9 +64,9 @@ mkdir -p /root/.kube
 sudo cp -i /etc/kubernetes/admin.conf /root/.kube/config
 sudo chown root:root /root/.kube/config
 
-wget https://docs.projectcalico.org/v3.11/manifests/calico.yaml
-sed -i 's/192.168.0.0\/16/10.10.0.0\/16/g' calico.yaml
-kubectl apply -f calico.yaml
+wget https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml
+sed -i 's/10.244.0.0\/16/10.10.0.0\/16/g' kube-flannel.yaml
+kubectl apply -f kube-flannel.yml
 rm -rf calico.yaml
 
 echo ' '
