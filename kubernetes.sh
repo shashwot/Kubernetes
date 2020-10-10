@@ -67,7 +67,7 @@ sudo chown root:root /root/.kube/config
 wget https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml
 sed -i 's/10.244.0.0\/16/10.10.0.0\/16/g' kube-flannel.yaml
 kubectl apply -f kube-flannel.yml
-rm -rf calico.yaml
+rm -rf kube-flannel.yml
 
 echo ' '
 echo ' '
