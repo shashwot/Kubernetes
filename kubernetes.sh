@@ -65,7 +65,7 @@ sudo cp -i /etc/kubernetes/admin.conf /root/.kube/config
 sudo chown root:root /root/.kube/config
 
 wget https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml
-sed -i 's/10.244.0.0\/16/10.10.0.0\/16/g' kube-flannel.yaml
+sed -i 's/10.244.0.0\/16/10.10.0.0\/16/g' kube-flannel.yml
 kubectl apply -f kube-flannel.yml
 rm -rf kube-flannel.yml
 
