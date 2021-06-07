@@ -53,7 +53,7 @@ sudo hostnamectl set-hostname master-node
 
 clear
 
-read -p " Enter your IP: " action
+action=$(hostname -I | cut -f1 -d' ')
 
 #Enter you desired ip for master
 echo $action 'master master-node' >> /etc/hosts
